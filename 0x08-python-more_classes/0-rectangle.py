@@ -2,4 +2,4 @@
 
 class Rectangle:
     """Empty Rectangle class"""
-            pass
+    pass
