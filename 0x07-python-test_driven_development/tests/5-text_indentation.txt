@@ -1,0 +1,20 @@
+# Test cases for text_indentation function
+
+>>> text_indentation("This is a simple text.")
+This is a simple text.
+
+>>> text_indentation("This is another text? Yes, it is.")
+This is another text?
+Yes, it is.
+
+>>> text_indentation("One more example: a sentence. Another one?")
+One more example: a sentence.
+Another one?
+
+>>> text_indentation("   Extra spaces. ")
+Extra spaces.
+
+>>> text_indentation(123)
+Traceback (most recent call last):
+    ...
+TypeError: text must be a string
