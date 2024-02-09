@@ -1,5 +1,5 @@
 import unittest
-from your_module import max_integer  # Replace 'your_module' with the actual module name containing the function
+from .your_module import max_integer  # Use a relative import
 
 class TestMaxIntegerFunction(unittest.TestCase):
 
