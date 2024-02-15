@@ -1,18 +1,10 @@
-# models/base.py
+#!/usr/bin/python3
+"""Module documentation: base.py"""
 
 class Base:
-    """Base class for managing id attribute."""
+    """Class documentation: Base"""
 
-    __nb_objects = 0
-
-    def __init__(self, id=None):
-        """Initialize Base instance.
-
-        Args:
-            id (int): If provided, assign to the public instance attribute id.
-        """
-        if id is not None:
-            self.id = id
-        else:
-            type(self).__nb_objects += 1
-            self.id = type(self).__nb_objects
+    def __init__(self, width, height):
+        """Method documentation: __init__"""
+        self.width = width
+        self.height = height
