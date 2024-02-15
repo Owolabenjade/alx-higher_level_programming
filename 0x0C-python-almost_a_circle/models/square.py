@@ -24,14 +24,17 @@ class Square(Rectangle):
         """Method documentation: update"""
         if args:
             attrs = ["id", "size", "x", "y"]
-            for attr, value in zip(attrs, args):
-                setattr(self, attr, value)
+            for i, val in enumerate(args):
+                setattr(self, attrs[i], val)
         elif kwargs:
-            for key, value in kwargs.items():
-                setattr(self, key, value)
+            for key, val in kwargs.items():
+                setattr(self, key, val)
 
-    def __str__(self):
-        """Method documentation: __str__"""
-        return "[Square] ({}) {}/{} - {}".format(
-            self.id, self.x, self.y, self.width
-        )
+    def to_dictionary(self):
+        """Method documentation: to_dictionary"""
+        return {
+            "id": self.id,
+            "size": self.size,
+            "x": self.x,
+            "y": self.y
+        }
