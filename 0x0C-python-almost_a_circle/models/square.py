@@ -20,6 +20,16 @@ class Square(Rectangle):
         self.width = value
         self.height = value
 
+    def update(self, *args, **kwargs):
+        """Method documentation: update"""
+        if args:
+            attrs = ["id", "size", "x", "y"]
+            for attr, value in zip(attrs, args):
+                setattr(self, attr, value)
+        elif kwargs:
+            for key, value in kwargs.items():
+                setattr(self, key, value)
+
     def __str__(self):
         """Method documentation: __str__"""
         return "[Square] ({}) {}/{} - {}".format(
