@@ -1,28 +1,39 @@
 #!/usr/bin/python3
 
 def list_division(my_list_1, my_list_2, list_length):
-    result_list = []
+    result = []
 
     for i in range(list_length):
         try:
-            result = my_list_1[i] / my_list_2[i]
-        except (ZeroDivisionError, TypeError):
-            if type(my_list_1[i]) not in [int, float] or type(my_list_2[i]) not in [int, float]:
-                print("wrong type")
-            elif my_list_2[i] == 0:
-                print("division by 0")
-            else:
-                result = 0
-                print("out of range")
+            # Try to perform the division
+            division_result = my_list_1[i] / my_list_2[i]
+        except ZeroDivisionError:
+            # Handle division by zero
+            print("division by 0")
+            division_result = 0
+        except (TypeError, ValueError):
+            # Handle wrong type
+            print("wrong type")
+            division_result = 0
         except IndexError:
+            # Handle out of range
             print("out of range")
+            division_result = 0
         finally:
-            result_list.append(result)
+            # Append the result to the final list
+            result.append(division_result)
 
-    return result_list
+    return result
 
-# Example usage:
-# my_list_1 = [10, 20, 30]
-# my_list_2 = [2, 0, 5]
-# result = list_division(my_list_1, my_list_2, 3)
-# print("Result:", result)
+if __name__ == "__main__":
+    my_l_1 = [10, 8, 4]
+    my_l_2 = [2, 4, 4]
+    result = list_division(my_l_1, my_l_2, max(len(my_l_1), len(my_l_2)))
+    print(result)
+
+    print("--")
+
+    my_l_1 = [10, 8, 4, 4]
+    my_l_2 = [2, 0, "H", 2, 7]
+    result = list_division(my_l_1, my_l_2, max(len(my_l_1), len(my_l_2)))
+    print(result)
