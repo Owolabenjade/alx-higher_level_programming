@@ -2,6 +2,12 @@
 #include <stdio.h>
 
 /**
+ * print_python_bytes - Prints some basic info about Python bytes
+ * @p: PyObject pointer
+ */
+void print_python_bytes(PyObject *p);
+
+/**
  * print_python_list - Prints some basic info about Python lists
  * @p: PyObject pointer
  */
