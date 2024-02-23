@@ -19,7 +19,9 @@ def add_attribute(obj, attribute, value):
     if hasattr(obj, "__dict__") or (hasattr(obj, "__slots__") and attribute in obj.__slots__):
         setattr(obj, attribute, value)
     else:
-        raise TypeError("can't add new attribute")
+        error_message = "can't add new attribute"
+        error_class = TypeError
+        raise error_class(error_message)
 
 
 if __name__ == "__main__":
@@ -29,6 +31,13 @@ if __name__ == "__main__":
     mc = MyClass()
     add_attribute(mc, "name", "John")
     print(mc.name)
+
+    class AnotherClass:
+        __slots__ = ["data"]
+
+    ac = AnotherClass()
+    add_attribute(ac, "data", 42)
+    print(ac.data)
 
     try:
         a = "My String"
