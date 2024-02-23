@@ -18,11 +18,8 @@ def read_file(filename=""):
     """
     try:
         with open(filename, encoding='utf-8') as file:
-            content = file.read()
-            if content:
-                print(content, end='')
-            else:
-                print("File is empty.")
+            for line in file:
+                print(line, end='')
     except FileNotFoundError:
         pass  # Do nothing if the file is not found
 
