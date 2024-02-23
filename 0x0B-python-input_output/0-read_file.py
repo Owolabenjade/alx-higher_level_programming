@@ -8,9 +8,19 @@ def read_file(filename=""):
 
     Returns:
         None
+
+    Raises:
+        FileNotFoundError: If the specified file is not found.
+
+    Example:
+        >>> read_file("example.txt")
+        This is an example file.
     """
-    with open(filename, encoding='utf-8') as f:
-        print(f.read(), end='')
+    try:
+        with open(filename, encoding='utf-8') as file:
+            print(file.read(), end='')
+    except FileNotFoundError:
+        print(f"Error: File '{filename}' not found.")
 
 if __name__ == "__main__":
     read_file()
