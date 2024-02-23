@@ -24,7 +24,7 @@ Example:
 >>> lookup(obj)
 ['__init__', 'display', 'name']
 """
-return dir(obj)
+return [attr for attr in obj.__dir__() if not callable(getattr(obj, attr)) or attr.startswith('__')]
 
 
 if __name__ == "__main__":
