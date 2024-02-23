@@ -18,9 +18,13 @@ def read_file(filename=""):
     """
     try:
         with open(filename, encoding='utf-8') as file:
-            print(file.read(), end='')
+            content = file.read()
+            if content:
+                print(content, end='')
+            else:
+                print("File is empty.")
     except FileNotFoundError:
-        print(f"Error: File '{filename}' not found.")
+        pass  # Do nothing if the file is not found
 
 if __name__ == "__main__":
     read_file()
