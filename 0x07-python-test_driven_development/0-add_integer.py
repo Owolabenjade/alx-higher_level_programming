@@ -1,39 +1,40 @@
 #!/usr/bin/python3
 """
-This module provides a function add_integer() that adds two numbers.
-The function is designed to handle integers and floats, with floats being
-converted to integers before addition. Special float
-values like NaN and infinity
-are handled gracefully by raising appropriate errors.
+This module defines a function add_integer that adds two numbers.
+The function ensures that the inputs are either integers or floats.
+If they are floats, they are cast to integers before addition.
 """
 
-  def add_integer(a, b=98):
+def add_integer(a, b=98):
     """
     Adds two integers or floats.
-    After casting floats to integers, the function returns the sum.
-
-    Parameters:
-    a (int or float): The first number.
-    b (int or float, optional): The second number. Defaults to 98.
-
+    
+    Args:
+    a: The first parameter, must be an integer or float.
+    b: The second parameter, must be an integer or float. Defaults to 98.
+    
     Returns:
-    int: The sum of a and b after casting to integers.
-
+    The integer addition of a and b.
+    
     Raises:
-    TypeError: If either a or b is not an integer or float.
-    ValueError: If either a or b is NaN or an infinite number.
+    TypeError: If either a or b is neither an integer nor a float.
     """
     if not isinstance(a, (int, float)):
         raise TypeError("a must be an integer")
     if not isinstance(b, (int, float)):
         raise TypeError("b must be an integer")
-   
-    # Check for NaN by comparing the number with itself
-    if a != a or b != b:
-        raise ValueError("Cannot convert NaN to integer")
-  
-    # Check for infinity by comparing with a very large number
-    if abs(a) == float('inf') or abs(b) == float('inf'):
-        raise ValueError("Cannot convert infinity to integer")
-   
     return int(a) + int(b)
+
+# Below lines are examples of how to use the function and should not be included in the script file
+# print(add_integer(1, 2))
+# print(add_integer(100, -2))
+# print(add_integer(2))
+# print(add_integer(100.3, -2))
+# try:
+#     print(add_integer(4, "School"))
+# except Exception as e:
+#     print(e)
+# try:
+#     print(add_integer(None))
+# except Exception as e:
+#     print(e)
