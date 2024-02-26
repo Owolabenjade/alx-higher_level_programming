@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Module 8-class_to_json.py
+"""Module 9-student.py
 This module contains a class Student that defines a student by:
 - first_name
 - last_name
