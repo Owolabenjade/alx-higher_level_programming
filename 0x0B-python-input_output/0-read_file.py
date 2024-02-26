@@ -1,27 +1,16 @@
 #!/usr/bin/python3
+"""
+Module 0-read_file.py
+Contains a function that reads a text file (UTF-8) and prints it to stdout.
+"""
+
+
 def read_file(filename=""):
-    """
-    Function to read and print the contents of a text file to stdout.
+    """Reads from a file and prints its contents to stdout"""
+    with open(filename, 'r', encoding='utf-8') as f:
+        print(f.read(), end='')
 
-    Args:
-        filename (str): The name of the file to be read. Defaults to "".
-
-    Returns:
-        None
-
-    Raises:
-        FileNotFoundError: If the specified file is not found.
-
-    Example:
-        >>> read_file("example.txt")
-        This is an example file.
-    """
-    try:
-        with open(filename, encoding='utf-8') as file:
-            for line in file:
-                print(line, end='')
-    except FileNotFoundError:
-        pass  # Do nothing if the file is not found
 
 if __name__ == "__main__":
-    read_file()
+    # Example usage
+    read_file("example.txt")
