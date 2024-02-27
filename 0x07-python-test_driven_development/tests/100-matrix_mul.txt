@@ -1,0 +1,68 @@
+"""
+This is a test file for testing `matrix_mul` function with doctest.
+
+To run these tests, use the following command:
+python3 -m doctest -v 100-matrix_mul.txt
+"""
+
+def matrix_mul(m_a, m_b):
+    """
+    >>> matrix_mul([[1, 2]], [[3, 4], [5, 6]])
+    [[13, 16]]
+
+    >>> matrix_mul([[1]], [[2]])
+    [[2]]
+
+    >>> matrix_mul([[1, 2, 3], [4, 5, 6]], [[7, 8], [9, 10], [11, 12]])
+    [[58, 64], [139, 154]]
+
+    >>> matrix_mul([[1, 2]], [[1], [2]])
+    [[5]]
+
+    >>> matrix_mul([], [])
+    Traceback (most recent call last):
+    ...
+    ValueError: m_a can't be empty
+
+    >>> matrix_mul([[]], [[]])
+    Traceback (most recent call last):
+    ...
+    ValueError: m_a can't be empty
+
+    >>> matrix_mul([[1, 2], [3, 4]], [[1, 2, 3], [4, 5, 6]])
+    Traceback (most recent call last):
+    ...
+    ValueError: m_a and m_b can't be multiplied
+
+    >>> matrix_mul("not a list", [[1, 2], [3, 4]])
+    Traceback (most recent call last):
+    ...
+    TypeError: m_a must be a list
+
+    >>> matrix_mul([[1, 2], [3, 4]], "not a list")
+    Traceback (most recent call last):
+    ...
+    TypeError: m_b must be a list
+
+    >>> matrix_mul([[1, 2], [3, "four"]], [[1, 2], [3, 4]])
+    Traceback (most recent call last):
+    ...
+    TypeError: m_a should contain only integers or floats
+
+    >>> matrix_mul([[1, 2], [3, 4]], [[1, 2], ["three", 4]])
+    Traceback (most recent call last):
+    ...
+    TypeError: m_b should contain only integers or floats
+
+    >>> matrix_mul([[1, 2, 3]], [[4], [5], [6]])
+    [[32]]
+
+    >>> matrix_mul([[1, 2, 3], [4, 5, 6]], [[7], [8], [9]])
+    Traceback (most recent call last):
+    ...
+    ValueError: m_a and m_b can't be multiplied
+    """
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
