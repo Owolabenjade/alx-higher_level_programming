@@ -1,20 +1,25 @@
-# Test cases for text_indentation function
+>>> from task5_text_indentation import text_indentation
+>>> text_indentation("Hello. How are you? Fine, thank you.")
+Hello.
 
->>> text_indentation("This is a simple text.")
-This is a simple text.
+How are you?
 
->>> text_indentation("This is another text? Yes, it is.")
-This is another text?
-Yes, it is.
+Fine, thank you.
+>>> text_indentation("This is a test:is it working?")
+This is a test:
 
->>> text_indentation("One more example: a sentence. Another one?")
-One more example: a sentence.
-Another one?
+is it working?
 
->>> text_indentation("   Extra spaces. ")
-Extra spaces.
+>>> text_indentation("No errors.")
+No errors.
 
->>> text_indentation(123)
+>>> text_indentation(10)
 Traceback (most recent call last):
     ...
 TypeError: text must be a string
+>>> text_indentation("Spacing.  After punctuation.")
+Spacing.
+
+After punctuation.
+
+>>> text_indentation("")
