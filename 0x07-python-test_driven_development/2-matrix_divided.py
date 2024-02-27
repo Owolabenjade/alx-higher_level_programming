@@ -1,39 +1,30 @@
 #!/usr/bin/python3
+"""
+This module defines a function matrix_divided that divides all elements
+of a matrix by a divisor. The function checks for the correctness of
+the matrix and the divisor, ensuring type and value validity.
+"""
+
 
 def matrix_divided(matrix, div):
-    """
-    Divides all elements of a matrix by a given number.
-
+    """Divide all elements of a matrix.
     Args:
-    - matrix (list of lists): Matrix of integers or floats.
-    - div (number): Number (integer or float) to divide the matrix elements.
-
+        matrix: List of lists of integers or floats.
+        div: The divisor, a number (integer or float).
     Returns:
-    - list of lists: New matrix with elements rounded to 2 decimal places after division.
-
+        A new matrix with all elements divided by div, rounded to 2 decimal places.
     Raises:
-    - TypeError: If matrix is not a list of lists of integers or floats.
-                If each row of the matrix does not have the same size.
-                If div is not a number (integer or float).
-    - ZeroDivisionError: If div is equal to 0.
+        TypeError: If matrix is not a list of lists of integers or floats,
+                   if each row of the matrix is not the same size,
+                   or if div is not a number.
+        ZeroDivisionError: If div is zero.
     """
-    # Check if matrix is a list of lists of integers or floats
-    if not all(isinstance(row, list) and all(isinstance(num, (int, float)) for num in row) for row in matrix):
+    if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix) or not all(isinstance(elem, (int, float)) for row in matrix for elem in row):
         raise TypeError("matrix must be a matrix (list of lists) of integers/floats")
-
-    # Check if each row of the matrix has the same size
-    if any(len(row) != len(matrix[0]) for row in matrix):
+    if len(set(len(row) for row in matrix)) > 1:
         raise TypeError("Each row of the matrix must have the same size")
-
-    # Check if div is a number (integer or float)
     if not isinstance(div, (int, float)):
         raise TypeError("div must be a number")
-
-    # Check if div is not equal to 0
     if div == 0:
         raise ZeroDivisionError("division by zero")
-
-    # Perform matrix division and round to 2 decimal places
-    result_matrix = [[round(num / div, 2) for num in row] for row in matrix]
-
-    return result_matrix
+    return [[round(elem / div, 2) for elem in row] for row in matrix]
