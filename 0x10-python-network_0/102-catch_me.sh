@@ -1,4 +1,3 @@
 #!/bin/bash
-# This script makes a specific request that triggers a custom server response
-curl -sLX PUT "0.0.0.0:5000/catch_me" -H "Origin: HolbertonSchool" -d "user_id=98"
-
+# This script makes a request to 0.0.0.0:5000/catch_me that causes the server to respond with "You got me!"
+curl -sL -X PUT -d "user_id=98" -H "Origin: HolbertonSchool" 0.0.0.0:5000/catch_me
