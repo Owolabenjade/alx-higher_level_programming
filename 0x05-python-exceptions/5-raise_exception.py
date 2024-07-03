@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 
 def raise_exception():
-    try:
-        raise TypeError("Type exception raised")
-    except TypeError as e:
-        print(e)
+    # Raise a TypeError exception
+    raise TypeError("Exception raised")
 
-# Example usage:
-# raise_exception()
+if __name__ == "__main__":
+    try:
+        raise_exception()
+    except TypeError as te:
+        print("Exception raised")
+

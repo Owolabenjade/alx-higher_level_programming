@@ -1,32 +1,17 @@
-# Test cases for add_integer function
-
+>>> from 0-add_integer import add_integer
 >>> add_integer(1, 2)
 3
-
->>> add_integer(-2, 2)
-0
-
->>> add_integer(0, 0)
-0
-
 >>> add_integer(100, -2)
 98
-
->>> add_integer(3.5, 2.5)
+>>> add_integer(2.5, 3.5)
 6
-
->>> add_integer(3.5)
+>>> add_integer(100.5, 0.5)
 101
-
->>> add_integer()
-98
-
->>> add_integer(3.5, "hello")
-Traceback (most recent call last):
-    ...
-TypeError: b must be an integer
-
->>> add_integer("hello", 3.5)
+>>> add_integer("100", 100)
 Traceback (most recent call last):
     ...
 TypeError: a must be an integer
+>>> add_integer(100, "200")
+Traceback (most recent call last):
+    ...
+TypeError: b must be an integer

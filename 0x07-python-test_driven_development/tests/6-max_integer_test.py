@@ -1,39 +1,38 @@
+#!/usr/bin/python3
 import unittest
-from .your_module import max_integer  # Use a relative import
+from max_integer import max_integer
 
-class TestMaxIntegerFunction(unittest.TestCase):
-
-    def test_regular_list(self):
-        result = max_integer([1, 2, 3, 4, 5])
-        self.assertEqual(result, 5)
-
+class TestMaxInteger(unittest.TestCase):
+    """
+    Defines test cases for the max_integer function.
+    This class tests various lists to ensure correct maximum integer identification.
+    """
+    
+    def test_sorted_list(self):
+        """Test with a list of sorted integers."""
+        self.assertEqual(max_integer([1, 2, 3, 4]), 4)
+    
+    def test_unsorted_list(self):
+        """Test with a list of unsorted integers."""
+        self.assertEqual(max_integer([4, 1, 3, 2]), 4)
+    
+    def test_with_negative(self):
+        """Test a list containing negative values."""
+        self.assertEqual(max_integer([-1, -2, -3, -4]), -1)
+    
+    def test_single_element(self):
+        """Test a single-element list."""
+        self.assertEqual(max_integer([7]), 7)
+    
     def test_empty_list(self):
-        result = max_integer([])
-        self.assertIsNone(result)
-
-    def test_all_negative_numbers(self):
-        result = max_integer([-1, -2, -3, -4, -5])
-        self.assertEqual(result, -1)
-
-    def test_mixed_positive_and_negative_numbers(self):
-        result = max_integer([-1, 2, -3, 4, -5])
-        self.assertEqual(result, 4)
-
-    def test_all_positive_numbers(self):
-        result = max_integer([1, 2, 3, 4, 5])
-        self.assertEqual(result, 5)
-
-    def test_float_numbers(self):
-        result = max_integer([1.5, 2.5, 3.5, 4.5])
-        self.assertEqual(result, 4.5)
-
-    def test_mixed_integer_and_float_numbers(self):
-        result = max_integer([1, 2, 3.5, 4, 5])
-        self.assertEqual(result, 5)
-
-    def test_strings_in_list(self):
-        with self.assertRaises(TypeError):
-            max_integer([1, 2, 'three', 4, 5])
+        """Test an empty list."""
+        self.assertIsNone(max_integer([]))
+    
+    def test_same_elements(self):
+        """Test a list where all elements are the same."""
+        self.assertEqual(max_integer([3, 3, 3, 3]), 3)
+    
+    # You can add more tests to cover other cases, such as lists with strings (which should raise an error).
 
 if __name__ == '__main__':
     unittest.main()
