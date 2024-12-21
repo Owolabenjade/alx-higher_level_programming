@@ -1,14 +1,15 @@
 #!/usr/bin/node
-const Square = require('./5-square');
+const Square5 = require('./5-square');
 
-class Square extends Square { // Inherit from 'Square' in 5-square.js
-	charPrint(c) {
-		if (typeof c === 'undefined') {
-			c = 'X';
-		}
-		for (let i = 0; i < this.height; i++) { 
-			console.log(c.repeat(this.width));
-		}
-	}
+class Square extends Square5 {
+  charPrint (c) {
+    if (this.width && this.height) {
+      const printChar = c === undefined ? 'X' : c;
+      for (let i = 0; i < this.height; i++) {
+        console.log(printChar.repeat(this.width));
+      }
+    }
+  }
 }
 
+module.exports = Square;
