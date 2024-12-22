@@ -1,8 +1,5 @@
 #!/usr/bin/node
-let count = 0; // Initialize a counter variable outside the function
-
+let count = 0;
 exports.logMe = function (item) {
-	console.log(`${count}: ${item}`);
-	count++;
+  console.log(`${count++}: ${item}`);
 };
-
