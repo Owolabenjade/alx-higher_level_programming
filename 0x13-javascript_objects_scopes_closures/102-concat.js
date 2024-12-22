@@ -1,22 +1,12 @@
 #!/usr/bin/node
 const fs = require('fs');
-const [,, fileA, fileB, destFile] = process.argv; // Destructure command-line arguments
 
-fs.readFile(fileA, 'utf-8', (err, dataA) => {
-	if (err) {
-	console.error(err); 
-	} else {
-	fs.readFile(fileB, 'utf-8', (err, dataB) => {
-	  if (err) {
-		console.error(err); 
-	  } else {
-		fs.writeFile(destFile, dataA + dataB, (err) => {
-		  if (err) {
-			console.error(err); 
-		  }
-		});
-	  }
-	});
-	}
-});
+const [,, sourceFile1, sourceFile2, destinationFile] = process.argv;
 
+try {
+  const content1 = fs.readFileSync(sourceFile1, 'utf8');
+  const content2 = fs.readFileSync(sourceFile2, 'utf8');
+  fs.writeFileSync(destinationFile, content1 + content2);
+} catch (error) {
+  console.error(error);
+}
