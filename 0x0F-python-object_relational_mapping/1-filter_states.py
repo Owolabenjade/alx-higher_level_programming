@@ -1,28 +1,57 @@
 #!/usr/bin/python3
 """
-This module provides a script that connects to a MySQL database and lists all states
-from the database `hbtn_0e_0_usa` that start with the letter 'N'. The states
-are listed in ascending order by their ids.
+Script that lists all states with a name starting with N
+from the database hbtn_0e_0_usa
 """
-
 import MySQLdb
 import sys
 
-def list_states_n(username, password, dbname):
-    """
-    Connects to a MySQL database and lists all states starting with 'N' sorted by id.
-    """
-    db = MySQLdb.connect(host="localhost", port=3306,
-                         user=username, passwd=password, db=dbname)
-    cur = db.cursor()
-    cur.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
-    rows = cur.fetchall()
-    for row in rows:
-        print(row)
-    cur.close()
-    db.close()
 
 if __name__ == "__main__":
-    if len(sys.argv) == 4:
-        list_states_n(sys.argv[1], sys.argv[2], sys.argv[3])
+    # Check if all required arguments are provided
+    if len(sys.argv) != 4:
+        print("Usage: {} username password database".format(sys.argv[0]))
+        sys.exit(1)
 
+    # Get MySQL connection parameters from command line arguments
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database = sys.argv[3]
+
+    try:
+        # Establish connection to MySQL server
+        db = MySQLdb.connect(
+            host="localhost",
+            port=3306,
+            user=username,
+            passwd=password,
+            db=database
+        )
+
+        # Create a cursor object to execute queries
+        cursor = db.cursor()
+
+        # Execute the SELECT query to get states starting with N
+        cursor.execute("""
+            SELECT * FROM states 
+            WHERE name LIKE 'N%'
+            ORDER BY id ASC
+        """)
+
+        # Fetch all rows from the query result
+        states = cursor.fetchall()
+
+        # Display the results
+        for state in states:
+            print(state)
+
+    except MySQLdb.Error as e:
+        print("MySQL Error: {}".format(e))
+        sys.exit(1)
+
+    finally:
+        # Close cursor and database connection
+        if 'cursor' in locals():
+            cursor.close()
+        if 'db' in locals():
+            db.close()
