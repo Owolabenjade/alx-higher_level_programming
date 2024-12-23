@@ -1,29 +1,43 @@
 #!/usr/bin/python3
 """
-This script deletes all State objects from the database `hbtn_0e_6_usa` that have
-a name containing the letter 'a'. It uses SQLAlchemy to interact with the database
-safely and efficiently.
+Script that deletes all State objects with a name containing
+the letter 'a' from the database hbtn_0e_6_usa
 """
 
 import sys
+from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model_state import Base, State
+from urllib.parse import quote_plus
+
 
 if __name__ == "__main__":
-    if len(sys.argv) == 4:
-        username, password, database = sys.argv[1], sys.argv[2], sys.argv[3]
-        engine = create_engine(f'mysql+mysqldb://{username}:{password}@localhost/{database}')
-        Base.metadata.bind = engine
-
-        Session = sessionmaker(bind=engine)
-        session = Session()
-
-        # Query for all states containing 'a' in their names
-        states_to_delete = session.query(State).filter(State.name.like('%a%')).all()
-        for state in states_to_delete:
-            session.delete(state)  # Delete each state object found
-
-        session.commit()  # Commit changes to the database
-        session.close()
-
+    # Get MySQL credentials and database name from command line arguments
+    username = sys.argv[1]
+    password = quote_plus(sys.argv[2])
+    database = sys.argv[3]
+    
+    # Create connection to database
+    engine = create_engine(
+        f'mysql+mysqldb://{username}:{password}@localhost:3306/{database}',
+        pool_pre_ping=True
+    )
+    
+    # Create session factory
+    Session = sessionmaker(bind=engine)
+    
+    # Create session
+    session = Session()
+    
+    # Query all State objects containing letter 'a'
+    states_to_delete = session.query(State).filter(State.name.like('%a%')).all()
+    
+    # Delete the states
+    for state in states_to_delete:
+        session.delete(state)
+    
+    # Commit the changes
+    session.commit()
+    
+    # Close session
+    session.close()
