@@ -1,22 +1,23 @@
 #!/usr/bin/python3
 """
-This module defines the City class and links it to the cities table in
-the database using SQLAlchemy.
+Contains the class definition of a City
 """
 
 from sqlalchemy import Column, Integer, String, ForeignKey
-from model_state import Base, State
+from model_state import Base
+
 
 class City(Base):
     """
-    The City class corresponds to the cities table.
+    City class that inherits from Base
+    
     Attributes:
-        id (int): city id, primary key, autoincremented and not nullable.
-        name (str): city name, not nullable.
-        state_id (int): id of the state the city belongs to, not nullable, foreign key.
+        id: city id
+        name: city name
+        state_id: reference to state
     """
     __tablename__ = 'cities'
-    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
-    name = Column(String(256), nullable=False)
+    
+    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    name = Column(String(128), nullable=False)
     state_id = Column(Integer, ForeignKey('states.id'), nullable=False)
-
