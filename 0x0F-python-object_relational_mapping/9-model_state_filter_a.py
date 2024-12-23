@@ -1,28 +1,43 @@
 #!/usr/bin/python3
 """
-This script lists all State objects from the database `hbtn_0e_6_usa` that contain
-the letter 'a' in their name. The results are sorted in ascending order by states.id.
-It uses SQLAlchemy for querying the database.
+Script that lists all State objects containing letter 'a'
+from the database hbtn_0e_6_usa
 """
 
 import sys
+from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model_state import Base, State
+from urllib.parse import quote_plus
+
 
 if __name__ == "__main__":
-    if len(sys.argv) == 4:
-        username, password, database = sys.argv[1], sys.argv[2], sys.argv[3]
-        engine = create_engine(f'mysql+mysqldb://{username}:{password}@localhost/{database}')
-        Base.metadata.bind = engine
-
-        Session = sessionmaker(bind=engine)
-        session = Session()
-
-        # Query all states containing 'a' in their names, ordered by id
-        states = session.query(State).filter(State.name.like('%a%')).order_by(State.id)
-        for state in states:
-            print(f"{state.id}: {state.name}")
-
-        session.close()
-
+    # Get MySQL credentials and database name from command line arguments
+    username = sys.argv[1]
+    password = quote_plus(sys.argv[2])  # Encode special characters in password
+    database = sys.argv[3]
+    
+    # Create connection to database
+    engine = create_engine(
+        f'mysql+mysqldb://{username}:{password}@localhost:3306/{database}',
+        pool_pre_ping=True
+    )
+    
+    # Create session factory
+    Session = sessionmaker(bind=engine)
+    
+    # Create session
+    session = Session()
+    
+    # Query all State objects containing letter 'a', ordered by id
+    states = session.query(State)\
+                   .filter(State.name.like('%a%'))\
+                   .order_by(State.id)\
+                   .all()
+    
+    # Display results
+    for state in states:
+        print("{}: {}".format(state.id, state.name))
+    
+    # Close session
+    session.close()
