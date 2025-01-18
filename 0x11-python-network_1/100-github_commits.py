@@ -1,23 +1,21 @@
 #!/usr/bin/python3
+"""This lists the 10 most recent commits on a given GitHub repository.
+Usage: ./100-github_commits.py <repository name> <repository owner>
 """
-Fetches the last 10 commits of a given repository and owner from GitHub using the GitHub API.
-Prints the SHA and the author name of each commit.
-Utilizes requests for HTTP requests and sys to handle command line arguments.
-"""
-
-import requests
 import sys
+import requests
+
 
 if __name__ == "__main__":
-    repo_name = sys.argv[1]
-    owner_name = sys.argv[2]
-    url = f'https://api.github.com/repos/{owner_name}/{repo_name}/commits'
-    params = {'per_page': 10}
+    url = "https://api.github.com/repos/{}/{}/commits".format(
+        sys.argv[2], sys.argv[1])
 
-    response = requests.get(url, params=params)
-    commits = response.json()
-
-    for commit in commits:
-        sha = commit.get('sha')
-        author = commit.get('commit').get('author').get('name')
-        print(f"{sha}: {author}")
+    r = requests.get(url)
+    commits = r.json()
+    try:
+        for i in range(10):
+            print("{}: {}".format(
+                commits[i].get("sha"),
+                commits[i].get("commit").get("author").get("name")))
+    except IndexError:
+        pass

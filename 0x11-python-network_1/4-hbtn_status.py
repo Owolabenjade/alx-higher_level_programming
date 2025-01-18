@@ -1,14 +1,10 @@
 #!/usr/bin/python3
-"""
-Fetches the status from https://alx-intranet.hbtn.io/status using the requests package.
-This script demonstrates fetching web content simply and displaying it in a formatted manner.
-"""
-
+"""THis fetches https://alx-intranet.hbtn.io/status."""
 import requests
 
+
 if __name__ == "__main__":
-    response = requests.get('https://alx-intranet.hbtn.io/status')
-    content = response.text
+    r = requests.get("https://alx-intranet.hbtn.io/status")
     print("Body response:")
-    print(f"\t- type: {type(content)}")
-    print(f"\t- content: {content}")
+    print("\t- type: {}".format(type(r.text)))
+    print("\t- content: {}".format(r.text))
