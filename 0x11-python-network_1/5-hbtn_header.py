@@ -14,4 +14,3 @@ if __name__ == "__main__":
     request_id = response.headers.get('X-Request-Id')
     if request_id:
         print(request_id)
-
