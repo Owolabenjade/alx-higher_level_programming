@@ -11,4 +11,3 @@ request(url, (err, response) => {
     console.log(`code: ${response.statusCode}`);
   }
 });
-
